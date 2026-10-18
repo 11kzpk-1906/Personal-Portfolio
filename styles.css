@@ -1299,3 +1299,23 @@ a:focus-visible,button:focus-visible { outline: 2px solid var(--accent); outline
 @media (prefers-reduced-motion: reduce) {
   *,*::before,*::after { scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important; }
 }
+
+
+/* Reveal states are only applied when JavaScript is active. */
+.reveal-ready { opacity:0; transform:translateY(18px); transition:opacity .65s ease, transform .65s ease; }
+.reveal-ready.is-visible { opacity:1; transform:translateY(0); }
+@media (max-width: 900px) and (min-width: 761px) {
+  .navbar { gap:12px; }
+  .menu-toggle { display:flex;order:3;margin-left:0; }
+  .nav-github { display:inline-flex;order:2;padding:8px 11px;font-size:.65rem; }
+  .nav-links { display:none;position:absolute;top:68px;left:20px;right:20px;flex-direction:column;align-items:stretch;gap:0;padding:8px;border:1px solid var(--border);border-radius:14px;background:rgba(11,13,18,.97);backdrop-filter:blur(20px);box-shadow:0 18px 50px #0008; }
+  .nav-links.open { display:flex; }
+  .nav-links a { padding:13px 12px;font-size:.76rem;border-radius:8px; }
+  .nav-links a:hover,.nav-links a.active { background:#ffffff08; }
+  .nav-links a::after { display:none; }
+  .menu-toggle[aria-expanded="true"] span:first-child { transform:translateY(3.25px) rotate(45deg); }
+  .menu-toggle[aria-expanded="true"] span:last-child { transform:translateY(-3.25px) rotate(-45deg); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .reveal-ready,.reveal-ready.is-visible { opacity:1;transform:none; }
+}
