@@ -146,35 +146,4 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     });
   }
-
-  const liveRepoGrid = $("#live-repo-grid");
-  const liveRepoNote = $("#repositories-note");
-  if (liveRepoGrid) {
-    fetch("https://api.github.com/users/arnavpawar671-ctrl/repos?sort=updated&per_page=4")
-      .then((response) => response.ok ? response.json() : Promise.reject())
-      .then((repos) => {
-        repos.filter((repo) => !repo.fork).slice(0, 4).forEach((repo) => {
-          const card = document.createElement("article");
-          card.className = "live-repo-card";
-          const title = document.createElement("h4");
-          const link = document.createElement("a");
-          link.href = repo.html_url;
-          link.target = "_blank";
-          link.rel = "noopener noreferrer";
-          link.textContent = repo.name;
-          title.append(link);
-          const description = document.createElement("p");
-          description.className = "live-repo-description";
-          description.textContent = repo.description || "Open the repository to explore this project.";
-          const meta = document.createElement("p");
-          meta.className = "live-repo-meta";
-          meta.textContent = (repo.language || "Code") + " · ★ " + (repo.stargazers_count || 0);
-          card.append(title, description, meta);
-          liveRepoGrid.append(card);
-        });
-        if (liveRepoNote) liveRepoNote.textContent = "Latest public repositories from GitHub.";
-      })
-      .catch(() => { if (liveRepoNote) liveRepoNote.textContent = "Live repositories are temporarily unavailable. Use the All repositories link above."; });
-  }
-
 });
