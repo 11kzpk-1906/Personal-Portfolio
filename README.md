@@ -1,107 +1,31 @@
-# 👋 Hey, I'm Arnav
+# 💜 Arnav Pawar — Developer Portfolio
 
-### Student • Developer • AI Enthusiast
+A personal portfolio for an aspiring software engineer and AI enthusiast, designed with a polished lavender, lilac, and deep-violet visual identity.
 
-I'm a student who enjoys building software, experimenting with
-new technologies, and turning random ideas into working projects.
+## ✨ About
 
----
+I'm Arnav, a student developer passionate about artificial intelligence, software engineering, and modern web experiences. I learn by building projects, solving problems, and improving through iteration.
 
-## 🚀 What I Build
+## 🧩 Featured projects
 
-- 🌐 Web applications & websites
-- 🤖 AI-powered tools
-- 🐍 Python projects
-- 💻 Software experiments
-- 🎨 UI & frontend projects
-- 🧪 Random things that seemed like a good idea at 2 AM
+- **ForgeAI** — an AI-powered software engineering assistant concept.
+- **Nova AI** — a Windows-first personal AI assistant experiment.
+- **Eduverse** — an educational software project.
+- **Rajmudra Enterprises** — a business website for IT infrastructure and security solutions.
+- **Personal Agent** — experiments with personal AI agents and useful workflows.
 
----
+## 🛠️ Built with
 
-## 🛠️ Technologies
+HTML · CSS · JavaScript · Responsive design · GitHub API
 
-### Languages
+## 🎨 Design
 
-`Python` `C++` `C#` `JavaScript` `TypeScript` `HTML` `CSS`
+Lavender gradients, soft violet lighting, glass-inspired surfaces, accessible interactions, and responsive layouts.
 
-### Tools & Technologies
+## 🌐 Live portfolio
 
-`React` `Node.js` `Git` `GitHub` `VS Code` `FastAPI`
+https://11kzpk-1906.github.io/Personal-Portfolio/
 
----
+## 🚀 Development
 
-## 📂 Projects
-
-My portfolio contains all of my public GitHub projects and experiments.
-
-### ⭐ Featured
-
-- **Nova Personal AI**
-  Personal AI/software project focused on building an intelligent
-  assistant experience.
-
-- **Personal Agent**
-  An experimental personal AI/agent project.
-
-- **Rajmudra Enterprises**
-  A modern business website built and designed from scratch.
-
-- **Eduverse**
-  An educational software/web project.
-
-- **Jarvis AI**
-  An AI assistant experiment.
-
----
-
-## 📊 GitHub
-
-You can find all of my repositories and experiments on my GitHub profile.
-
-**GitHub:**  
-https://github.com/arnavpawar671-ctrl
-
----
-
-## 🌱 Currently Learning
-
-I'm currently exploring:
-
-- C++
-- C#
-- Artificial Intelligence
-- Software Engineering
-- Web Development
-- New developer tools & technologies
-
----
-
-## 🎯 Goals
-
-Build better software.
-
-Learn something new every day.
-
-Turn ideas into real projects.
-
-Keep experimenting.
-
----
-
-## 📫 Connect With Me
-
-**GitHub:**  
-https://github.com/arnavpawar671-ctrl
-
-**Bluesky:**  
-https://bsky.app/profile/katekaru1906arnav.bsky.social
-
----
-
-> "Build it. Break it. Learn from it. Build it better."
-
----
-
-### ⚡ Thanks for visiting!
-
-Made with curiosity and way too much code.
+This is a lightweight static website. Open `index.html` locally or publish the repository with GitHub Pages.
