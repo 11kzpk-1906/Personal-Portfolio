@@ -13,7 +13,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="icon" type="image/svg+xml" href="favicon.svg">\n  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="stylesheet" href="styles.css">
   <script src="script.js" defer></script>
 </head>
 <body>
@@ -174,5 +175,25 @@
 
   <footer class="site-footer"><div class="container footer-inner"><a href="#home" class="brand">ARNAV<span>.</span></a><span>Designed with curiosity. Built with code.</span><span>© <span id="year"></span> Arnav Pawar</span></div></footer>
   <a class="back-to-top" id="back-to-top" href="#home" aria-label="Back to top">↑</a>
+
+  <dialog class="command-palette" id="command-palette" aria-labelledby="palette-title">
+    <div class="palette-shell">
+      <div class="palette-search-row"><span class="palette-search-icon" aria-hidden="true">⌕</span><label class="sr-only" for="palette-search">Search portfolio commands</label><input id="palette-search" type="search" placeholder="Search sections, projects, or actions…" autocomplete="off" spellcheck="false"><kbd>ESC</kbd></div>
+      <div class="palette-heading"><span id="palette-title">QUICK NAVIGATION</span><span>↑ ↓ navigate · ↵ select</span></div>
+      <div class="palette-results" id="palette-results" role="listbox" aria-label="Portfolio commands">
+        <button class="palette-item" type="button" role="option" data-label="Home" data-target="#home"><span class="palette-item-icon">⌂</span><span><strong>Go to home</strong><small>Back to the introduction</small></span><kbd>HOME</kbd></button>
+        <button class="palette-item" type="button" role="option" data-label="About" data-target="#about"><span class="palette-item-icon">◎</span><span><strong>About me</strong><small>What I like building</small></span></button>
+        <button class="palette-item" type="button" role="option" data-label="Skills Stack Toolkit" data-target="#skills"><span class="palette-item-icon">⌘</span><span><strong>Explore my toolkit</strong><small>Languages and technologies</small></span></button>
+        <button class="palette-item" type="button" role="option" data-label="Projects ForgeAI Nova AI Eduverse Rajmudra Personal Agent" data-target="#projects"><span class="palette-item-icon">◈</span><span><strong>Browse projects</strong><small>ForgeAI, Nova AI, Eduverse, and more</small></span><kbd>WORK</kbd></button>
+        <button class="palette-item" type="button" role="option" data-label="GitHub activity stats repositories" data-target="#activity"><span class="palette-item-icon">⌁</span><span><strong>GitHub activity</strong><small>Live public profile stats</small></span></button>
+        <button class="palette-item" type="button" role="option" data-label="Journey timeline learning" data-target="#journey"><span class="palette-item-icon">↗</span><span><strong>My journey</strong><small>What I'm learning next</small></span></button>
+        <button class="palette-item" type="button" role="option" data-label="Contact Bluesky GitHub connect" data-target="#contact"><span class="palette-item-icon">✳</span><span><strong>Connect with me</strong><small>Find me around the web</small></span></button>
+        <a class="palette-item" role="option" data-label="GitHub profile repositories source code" href="https://github.com/11kzpk-1906" target="_blank" rel="noopener noreferrer"><span class="palette-item-icon">↗</span><span><strong>Open GitHub profile</strong><small>Explore source code and repositories</small></span><kbd>↗</kbd></a>
+      </div>
+      <div class="palette-footer"><span><kbd>CTRL</kbd> <kbd>K</kbd> to open anytime</span><span>BUILT FOR CURIOSITY <b>✳</b></span></div><p class="palette-empty" id="palette-empty" hidden>No matches. Try “projects”, “GitHub”, or “skills”.</p>
+    </div>
+  </dialog>
+  <button class="palette-trigger" id="palette-trigger" type="button" aria-haspopup="dialog" aria-controls="command-palette"><span aria-hidden="true">⌕</span><span>Quick jump</span><kbd>⌘ K</kbd></button>
+
 </body>
 </html>
