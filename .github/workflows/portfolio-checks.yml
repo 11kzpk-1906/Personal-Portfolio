@@ -44,8 +44,8 @@ jobs:
           checks = {
               "non-empty page title": r"<title>[^<]+</title>",
               "responsive viewport meta tag": r"<meta[^>]+name=['\"]viewport['\"]",
-              "stylesheet link": r"href=['\"]styles\\.css['\"]",
-              "JavaScript entry point": r"src=['\"]script\\.js['\"]",
+              "stylesheet link": r"href=['\"]styles\.css['\"]",
+              "JavaScript entry point": r"src=['\"]script\.js['\"]",
           }
           for label, pattern in checks.items():
               if not re.search(pattern, html, re.IGNORECASE):
