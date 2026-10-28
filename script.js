@@ -111,7 +111,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const element = $(selector);
     if (element) element.textContent = value;
   };
-  fetch("https://api.github.com/users/arnavpawar671-ctrl", {
+  fetch("https://api.github.com/users/11kzpk-1906", {
     headers: { Accept: "application/vnd.github+json" }
   })
     .then((response) => {
