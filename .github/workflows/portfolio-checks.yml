@@ -36,13 +36,22 @@ jobs:
           done
 
       - name: Validate page essentials
-        shell: bash
         run: |
-          set -euo pipefail
-          grep -Eiq '<title>[^<]+</title>' index.html || { echo "::error file=index.html::A non-empty page title is required"; exit 1; }
-          grep -Eiq '<meta[^>]+name=["\x27]viewport["\x27]' index.html || { echo "::error file=index.html::A responsive viewport meta tag is required"; exit 1; }
-          grep -Eiq 'href=["\x27]styles\.css["\x27]' index.html || { echo "::error file=index.html::The stylesheet link is missing"; exit 1; }
-          grep -Eiq 'src=["\x27]script\.js["\x27]' index.html || { echo "::error file=index.html::The JavaScript entry point is missing"; exit 1; }
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+          html = Path("index.html").read_text(encoding="utf-8")
+          checks = {
+              "non-empty page title": r"<title>[^<]+</title>",
+              "responsive viewport meta tag": r'<meta[^>]+name=["\\']viewport["\\']',
+              "stylesheet link": r'href=["\\']styles\\.css["\\']',
+              "JavaScript entry point": r'src=["\\']script\\.js["\\']',
+          }
+          for label, pattern in checks.items():
+              if not re.search(pattern, html, re.IGNORECASE):
+                  raise SystemExit(f"Validation failed: missing {label} in index.html")
+          print("HTML essentials look good.")
+          PY
 
       - name: Check JavaScript syntax
         run: node --check script.js
