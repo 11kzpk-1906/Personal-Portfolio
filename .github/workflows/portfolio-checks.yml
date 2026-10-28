@@ -1,0 +1,57 @@
+name: Portfolio checks
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: portfolio-checks-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    name: Validate static portfolio
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Check required files
+        shell: bash
+        run: |
+          set -euo pipefail
+          for file in index.html styles.css script.js favicon.svg README.md; do
+            test -s "$file" || { echo "::error file=$file::Required file is missing or empty"; exit 1; }
+          done
+
+      - name: Validate page essentials
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+          html = Path("index.html").read_text(encoding="utf-8")
+          checks = {
+              "non-empty page title": r"<title>[^<]+</title>",
+              "responsive viewport meta tag": r"<meta[^>]+name=['\"]viewport['\"]",
+              "stylesheet link": r"href=['\"]styles\.css['\"]",
+              "JavaScript entry point": r"src=['\"]script\.js['\"]",
+          }
+          for label, pattern in checks.items():
+              if not re.search(pattern, html, re.IGNORECASE):
+                  raise SystemExit(f"Validation failed: missing {label} in index.html")
+          print("HTML essentials look good.")
+          PY
+
+      - name: Check JavaScript syntax
+        run: node --check script.js
