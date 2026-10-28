@@ -1,0 +1,48 @@
+name: Portfolio checks
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: portfolio-checks-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    name: Validate static portfolio
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Check required files
+        shell: bash
+        run: |
+          set -euo pipefail
+          for file in index.html styles.css script.js favicon.svg README.md; do
+            test -s "$file" || { echo "::error file=$file::Required file is missing or empty"; exit 1; }
+          done
+
+      - name: Validate page essentials
+        shell: bash
+        run: |
+          set -euo pipefail
+          grep -Eiq '<title>[^<]+</title>' index.html || { echo "::error file=index.html::A non-empty page title is required"; exit 1; }
+          grep -Eiq '<meta[^>]+name=["\x27]viewport["\x27]' index.html || { echo "::error file=index.html::A responsive viewport meta tag is required"; exit 1; }
+          grep -Eiq 'href=["\x27]styles\.css["\x27]' index.html || { echo "::error file=index.html::The stylesheet link is missing"; exit 1; }
+          grep -Eiq 'src=["\x27]script\.js["\x27]' index.html || { echo "::error file=index.html::The JavaScript entry point is missing"; exit 1; }
+
+      - name: Check JavaScript syntax
+        run: node --check script.js
