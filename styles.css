@@ -1319,3 +1319,76 @@ a:focus-visible,button:focus-visible { outline: 2px solid var(--accent); outline
 @media (prefers-reduced-motion: reduce) {
   .reveal-ready,.reveal-ready.is-visible { opacity:1;transform:none; }
 }
+
+
+/* Lavender personal brand refresh */
+:root {
+  --bg: #100d18;
+  --bg-soft: #191326;
+  --surface: rgba(230, 216, 255, 0.055);
+  --surface-hover: rgba(230, 216, 255, 0.095);
+  --text: #fbf8ff;
+  --text-soft: #d8cde8;
+  --text-muted: #a99bbd;
+  --accent: #c9adff;
+  --accent-2: #9a78d7;
+  --border: rgba(205, 179, 255, 0.16);
+}
+body {
+  background:
+    radial-gradient(circle at 12% 8%, rgba(171, 133, 235, .16), transparent 29%),
+    radial-gradient(circle at 88% 32%, rgba(124, 86, 180, .13), transparent 32%),
+    var(--bg);
+}
+::selection { background: rgba(201, 173, 255, .32); color: #fff; }
+.gradient-text {
+  background: linear-gradient(115deg, #f5edff 5%, #d6bcff 42%, #a985e8 88%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.ambient-one { background: rgba(170, 127, 235, .12); }
+.ambient-two { background: rgba(119, 82, 174, .12); }
+.btn-primary {
+  color: #20152e;
+  background: linear-gradient(135deg, #e8d8ff, #b998ef);
+  border-color: rgba(231, 215, 255, .65);
+  box-shadow: 0 8px 30px rgba(167, 125, 224, .17);
+}
+.btn-primary:hover { background: linear-gradient(135deg, #f3eaff, #c9a9ff); }
+.btn-secondary:hover, .nav-github:hover, .github-follow:hover {
+  border-color: rgba(201, 173, 255, .55);
+  background: rgba(201, 173, 255, .08);
+}
+.brand span, .accent-dot, .project-link span, .text-link,
+.nav-links a.active, .nav-links a:hover { color: var(--accent); }
+.status-dot { background: #c9adff; box-shadow: 0 0 13px rgba(201,173,255,.7); }
+.hero-orb {
+  background: radial-gradient(circle at 35% 28%, #f0e5ff, #b99be9 27%, #654b91 63%, #21172f 82%);
+  box-shadow: 0 0 90px rgba(176, 139, 235, .28), inset 0 0 35px rgba(255,255,255,.14);
+}
+.orb-orbit { border-color: rgba(201,173,255,.25); }
+.code-purple { color: #d0b5ff; }
+.code-green { color: #f0dcff; }
+.code-blue { color: #b9a1ef; }
+.code-window, .contact-shell { border-color: rgba(201,173,255,.2); }
+.visual-forge { background: radial-gradient(ellipse at 50% 55%, rgba(166,126,231,.3), transparent 62%), #171124; }
+.project-monogram { color: #eadfff; text-shadow: 0 0 50px rgba(201,173,255,.35); }
+.visual-orbit { border-color: rgba(201,173,255,.28); }
+.visual-nova { background: radial-gradient(ellipse at 50% 50%, rgba(163,126,226,.3), transparent 65%), #151020; }
+.nova-core { color: #f6eeff; background: radial-gradient(circle at 35% 25%, #f3eaff, #b49ae7 28%, #392852 72%); box-shadow: 0 0 65px rgba(181,145,236,.4); }
+.nova-ring { border-color: rgba(201,173,255,.3); }
+.visual-edu { background: radial-gradient(ellipse at 50% 45%, rgba(190,158,244,.2), transparent 65%), #171124; }
+.edu-stack span { border-color: rgba(201,173,255,.3); background: #332348cc; color: #f0e5ff; }
+.edu-stack span:nth-child(2) { background: #493064; }
+.agent-node, .agent-node.node-b, .agent-node.node-c { background: #c9adff; box-shadow: 0 0 30px rgba(201,173,255,.5); }
+.agent-lines { border-color: rgba(201,173,255,.45); }
+.contact-shell {
+  background: radial-gradient(ellipse at 90% 10%, rgba(169,126,230,.19), transparent 46%), linear-gradient(135deg, rgba(230,216,255,.06), rgba(255,255,255,.015));
+}
+.activity-mark, .timeline-marker { border-color: rgba(201,173,255,.3); background: rgba(201,173,255,.07); }
+.back-to-top { background: rgba(25,19,38,.9); }
+a:focus-visible, button:focus-visible { outline-color: #c9adff; }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { scroll-behavior: auto !important; }
+}
