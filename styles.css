@@ -1392,3 +1392,15 @@ a:focus-visible, button:focus-visible { outline-color: #c9adff; }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; }
 }
+
+
+/* Final lavender polish: tactile cards, clear project states, and better focus. */
+.project-card { position: relative; isolation: isolate; transition: transform .28s ease, border-color .28s ease, box-shadow .28s ease; }
+.project-card::after { content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; opacity: 0; background: radial-gradient(280px circle at var(--pointer-x, 50%) var(--pointer-y, 50%), rgba(201,173,255,.11), transparent 70%); transition: opacity .25s ease; z-index: -1; }
+.project-card:hover::after { opacity: 1; }
+.project-card:hover { transform: translateY(-5px); border-color: rgba(201,173,255,.35); box-shadow: 0 18px 48px rgba(5,2,12,.28); }
+.project-tech span { border-color: rgba(201,173,255,.22); }
+.project-status { white-space: nowrap; }
+.filter-btn:focus-visible, .menu-toggle:focus-visible { outline: 2px solid #c9adff; outline-offset: 4px; }
+.github-panel, .skill-card, .activity-cta { border-color: var(--border); }
+@media (prefers-reduced-motion: reduce) { .project-card, .project-card::after { transition: none !important; } .project-card:hover { transform: none; } }
