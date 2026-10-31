@@ -136,56 +136,6 @@ document.addEventListener("DOMContentLoaded", () => {
       if (githubNote) githubNote.textContent = "Live stats couldn't load right now. Your GitHub profile is still one click away.";
     });
 
-  // Live public repository dashboard: graceful loading, empty, and error states.
-  const liveReposGrid = $("#live-repos-grid");
-  const liveReposNote = $("#live-repos-note");
-  const formatRepoDate = (dateString) => {
-    if (!dateString) return "Date unknown";
-    const date = new Date(dateString);
-    if (Number.isNaN(date.getTime())) return "Date unknown";
-    return new Intl.DateTimeFormat(undefined, { month: "short", day: "numeric", year: "numeric" }).format(date);
-  };
-  const escapeHtml = (value) => String(value ?? "").replace(/[&<>"']/g, (character) => ({
-    "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"
-  })[character]);
-  if (liveReposGrid) {
-    fetch("https://api.github.com/users/11kzpk-1906/repos?sort=updated&direction=desc&per_page=100&type=owner", {
-      headers: { Accept: "application/vnd.github+json" }
-    })
-      .then((response) => {
-        if (!response.ok) throw new Error("GitHub repositories request failed");
-        return response.json();
-      })
-      .then((repositories) => {
-        if (!Array.isArray(repositories)) throw new Error("Unexpected GitHub response");
-        const recent = repositories
-          .filter((repo) => !repo.fork && !repo.archived)
-          .sort((a, b) => new Date(b.pushed_at || b.updated_at) - new Date(a.pushed_at || a.updated_at))
-          .slice(0, 6);
-        liveReposGrid.setAttribute("aria-busy", "false");
-        if (!recent.length) {
-          liveReposGrid.innerHTML = '<div class="repo-empty">No public repositories found yet. Check back soon.</div>';
-          if (liveReposNote) liveReposNote.textContent = "No public repositories were returned by GitHub.";
-          return;
-        }
-        liveReposGrid.innerHTML = recent.map((repo) => {
-          const language = repo.language ? escapeHtml(repo.language) : "Mixed / not specified";
-          const description = repo.description ? escapeHtml(repo.description) : "An experiment in progress — open the repository to explore the code.";
-          const updated = formatRepoDate(repo.pushed_at || repo.updated_at);
-          return '<article class="live-repo-card">' +
-            '<div class="live-repo-top"><a class="live-repo-name" href="' + escapeHtml(repo.html_url) + '" target="_blank" rel="noopener noreferrer">' + escapeHtml(repo.name) + ' ↗</a><span class="live-repo-visibility">PUBLIC</span></div>' +
-            '<p class="live-repo-description">' + description + '</p>' +
-            '<div class="live-repo-meta"><span class="live-repo-language"><i class="repo-language-dot" aria-hidden="true"></i>' + language + '</span><span>☆ ' + numberFormat.format(repo.stargazers_count || 0) + '</span><span>⑂ ' + numberFormat.format(repo.forks_count || 0) + '</span><span class="live-repo-updated">Pushed ' + escapeHtml(updated) + '</span></div>' +
-            '</article>';
-        }).join("");
-        if (liveReposNote) liveReposNote.textContent = "Showing " + recent.length + " recently active public repositories · refreshed on each visit.";
-      })
-      .catch(() => {
-        liveReposGrid.setAttribute("aria-busy", "false");
-        liveReposGrid.innerHTML = '<div class="repo-empty">Couldn’t load repository data right now. The GitHub API may be temporarily unavailable.</div>';
-        if (liveReposNote) liveReposNote.innerHTML = 'You can still browse <a href="https://github.com/11kzpk-1906?tab=repositories" target="_blank" rel="noopener noreferrer">all repositories on GitHub ↗</a>.';
-      });
-  }
 
   // Command palette: Ctrl/Cmd+K, searchable navigation, and arrow-key selection.
   const palette = $("#command-palette");

@@ -1436,32 +1436,3 @@ a:focus-visible, button:focus-visible { outline-color: #c9adff; }
 body.palette-open{overflow:hidden}
 @media(max-width:480px){.palette-trigger{right:15px;bottom:70px;padding:9px}.palette-trigger>span:nth-child(2){display:none}.palette-heading span:last-child{display:none}.palette-item{gap:9px;padding:10px 7px}.palette-footer{font-size:.52rem}}
 @media(prefers-reduced-motion:reduce){.palette-trigger{transition:none}}
-
-
-/* Live GitHub repository dashboard */
-.live-repos-block { margin-top: 44px; padding-top: 34px; border-top: 1px solid var(--border); }
-.live-repos-heading { display:flex; align-items:center; justify-content:space-between; gap:18px; }
-.live-repos-heading .eyebrow { color:var(--accent);font-size:.57rem;letter-spacing:.13em;margin-bottom:7px; }
-.live-repos-heading h3 { font:600 clamp(1.25rem,2.6vw,1.8rem) "Space Grotesk",sans-serif;letter-spacing:-.04em; }
-.live-repos-badge { display:inline-flex;align-items:center;gap:7px;padding:7px 10px;border:1px solid var(--border);border-radius:999px;color:var(--text-muted);font-size:.55rem;letter-spacing:.08em;white-space:nowrap; }
-.live-repos-badge i,.repo-language-dot { display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--accent);box-shadow:0 0 12px color-mix(in srgb,var(--accent) 45%,transparent); }
-.live-repos-intro { margin-top:9px;color:var(--text-muted);font-size:.68rem; }
-.live-repos-grid { display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:22px; }
-.live-repo-card { min-width:0;padding:19px;border:1px solid var(--border);border-radius:13px;background:linear-gradient(145deg,#ffffff08,#ffffff02);transition:transform .22s ease,border-color .22s ease,background .22s ease; }
-.live-repo-card:hover { transform:translateY(-3px);border-color:color-mix(in srgb,var(--accent) 42%,var(--border));background:var(--surface-hover); }
-.live-repo-top { display:flex;align-items:flex-start;justify-content:space-between;gap:12px; }
-.live-repo-name { overflow-wrap:anywhere;font:600 .91rem "Space Grotesk",sans-serif;color:var(--text); }
-.live-repo-name:hover { color:var(--accent); }
-.live-repo-visibility { flex-shrink:0;color:var(--text-muted);font-size:.5rem;border:1px solid var(--border);border-radius:999px;padding:3px 7px; }
-.live-repo-description { min-height:42px;margin-top:10px;color:var(--text-soft);font-size:.65rem;line-height:1.7;overflow-wrap:anywhere; }
-.live-repo-meta { display:flex;flex-wrap:wrap;align-items:center;gap:13px;margin-top:17px;color:var(--text-muted);font-size:.57rem; }
-.live-repo-language { display:inline-flex;align-items:center;gap:6px; }
-.repo-language-dot { width:6px;height:6px;box-shadow:none; }
-.live-repo-updated { margin-left:auto; }
-.repo-loading,.repo-empty { grid-column:1/-1;display:flex;align-items:center;gap:10px;padding:22px;border:1px dashed var(--border);border-radius:12px;color:var(--text-muted);font-size:.68rem; }
-.repo-loading-dot { width:8px;height:8px;border-radius:50%;background:var(--accent);animation:repo-pulse 1.1s ease-in-out infinite; }
-@keyframes repo-pulse { 50% { opacity:.3;transform:scale(.75); } }
-.live-repos-note { margin-top:14px;color:var(--text-muted);font-size:.57rem; }
-.live-repos-note a { color:var(--accent);text-underline-offset:3px; }
-@media (max-width:640px) { .live-repos-grid { grid-template-columns:1fr; }.live-repos-heading { align-items:flex-start; }.live-repos-badge { margin-top:2px; }.live-repo-description { min-height:0; } }
-@media (prefers-reduced-motion:reduce) { .repo-loading-dot { animation:none; }.live-repo-card { transition:none; } }
