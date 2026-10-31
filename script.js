@@ -136,6 +136,86 @@ document.addEventListener("DOMContentLoaded", () => {
       if (githubNote) githubNote.textContent = "Live stats couldn't load right now. Your GitHub profile is still one click away.";
     });
 
+
+  // Command palette: Ctrl/Cmd+K, searchable navigation, and arrow-key selection.
+  const palette = $("#command-palette");
+  const paletteTrigger = $("#palette-trigger");
+  const paletteSearch = $("#palette-search");
+  const paletteItems = $(".palette-item", palette || document);
+  const paletteEmpty = $("#palette-empty");
+  let activePaletteIndex = 0;
+  const visiblePaletteItems = () => paletteItems.filter((item) => !item.hidden);
+  const setActivePaletteItem = (index) => {
+    const visible = visiblePaletteItems();
+    if (!visible.length) return;
+    activePaletteIndex = (index + visible.length) % visible.length;
+    visible.forEach((item, i) => {
+      item.classList.toggle("is-active", i === activePaletteIndex);
+      item.setAttribute("aria-selected", String(i === activePaletteIndex));
+    });
+    visible[activePaletteIndex].scrollIntoView({ block: "nearest" });
+  };
+  const openPalette = () => {
+    if (!palette || palette.open) return;
+    if (typeof palette.showModal === "function") palette.showModal();
+    else palette.setAttribute("open", "");
+    document.body.classList.add("palette-open");
+    if (paletteSearch) { paletteSearch.value = ""; paletteSearch.dispatchEvent(new Event("input")); paletteSearch.focus(); }
+    setActivePaletteItem(0);
+  };
+  const closePalette = () => {
+    if (!palette) return;
+    if (typeof palette.close === "function" && palette.open) palette.close();
+    else palette.removeAttribute("open");
+    document.body.classList.remove("palette-open");
+    paletteTrigger?.focus({ preventScroll: true });
+  };
+  paletteTrigger?.addEventListener("click", openPalette);
+  palette?.addEventListener("click", (event) => { if (event.target === palette) closePalette(); });
+  palette?.addEventListener("close", () => document.body.classList.remove("palette-open"));
+  paletteSearch?.addEventListener("input", () => {
+    const query = paletteSearch.value.trim().toLowerCase();
+    paletteItems.forEach((item) => {
+      const haystack = ((item.dataset.label || "") + " " + item.textContent).toLowerCase();
+      item.hidden = !haystack.includes(query);
+    });
+    if (paletteEmpty) paletteEmpty.hidden = visiblePaletteItems().length > 0;
+    activePaletteIndex = 0;
+    setActivePaletteItem(0);
+  });
+  palette?.addEventListener("keydown", (event) => {
+    if (event.key === "ArrowDown" || event.key === "ArrowUp") {
+      event.preventDefault();
+      setActivePaletteItem(activePaletteIndex + (event.key === "ArrowDown" ? 1 : -1));
+    }
+    if (event.key === "Enter" && document.activeElement === paletteSearch) {
+      event.preventDefault();
+      visiblePaletteItems()[activePaletteIndex]?.click();
+    }
+  });
+  paletteItems.forEach((item) => {
+    item.addEventListener("mouseenter", () => {
+      const visible = visiblePaletteItems();
+      const index = visible.indexOf(item);
+      if (index >= 0) setActivePaletteItem(index);
+    });
+    item.addEventListener("click", (event) => {
+      const target = item.dataset.target;
+      if (!target) return;
+      event.preventDefault();
+      closePalette();
+      document.querySelector(target)?.scrollIntoView({ behavior: reducedMotion ? "auto" : "smooth", block: "start" });
+      if (target === "#projects") $('.filter-btn[data-filter="all"]')?.click();
+    });
+  });
+  document.addEventListener("keydown", (event) => {
+    if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === "k") {
+      event.preventDefault();
+      if (palette?.open) closePalette(); else openPalette();
+    }
+    if (event.key === "Escape" && palette?.open) closePalette();
+  });
+
   // Keep decorative interactions gentle and disable them for reduced-motion preferences.
   if (!reducedMotion && window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
     $$(".project-card").forEach((card) => {
